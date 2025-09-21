@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>ChillDrop — CBD желейки и аксессуары | Україна</title>
   <meta name="description" content="UA: CBD желейки и аксессуары. Доставка Нова пошта/Укрпошта, оплата картка/Monobank/WayforPay/крипто. 18+. Без медицинских заявлений.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
   <style>
   :root{--bg:#0b1220;--card:#0e1729;--muted:#94a3b8;--text:#e2e8f0;--brand:#16a34a;--brand-2:#22c55e;--border:#1f2a44}
   :root{--neon:#22e3a7;--neon-2:#61f4df;--glow:0 0 12px rgba(34,227,167,.55), 0 0 32px rgba(34,227,167,.35), 0 0 64px rgba(34,227,167,.15)}
@@ -322,21 +323,17 @@ search.addEventListener('input', applyFilters);
 document.querySelector('#checkout')?.addEventListener('click', ()=> alert('Демо: підключіть WayforPay/Monobank/крипто на проді.'));
 renderCards();
 
-// ===== Age-gate (no storage; always ask on each visit) =====
+// ===== Age-gate (cookie, 30 days) =====
+function setCookie(n,v,d){const t=new Date(); t.setTime(t.getTime()+d*24*60*60*1e3); document.cookie=`${n}=${v}; expires=${t.toUTCString()}; path=/`;}
+function getCookie(n){return document.cookie.split('; ').find(r=>r.startsWith(n+'='))?.split('=')[1]}
 const ageGate = document.querySelector('#age-gate');
 document.addEventListener('DOMContentLoaded', ()=>{
-  ageGate.hidden = false;
-  document.body.style.overflow='hidden';
+  if(getCookie('age_ok')==='1'){ ageGate.hidden = true; }
+  else { ageGate.hidden = false; document.body.style.overflow='hidden'; }
 });
 ageGate?.addEventListener('click', (e)=>{
-  if(e.target.matches('[data-age="yes"]')){
-    ageGate.hidden=true;
-    document.body.style.overflow='';
-  }
-  if(e.target.matches('[data-age="no"]')){
-    alert('Доступ 18+');
-    location.href='https://google.com';
-  }
+  if(e.target.matches('[data-age="yes"]')){ setCookie('age_ok','1',30); ageGate.hidden=true; document.body.style.overflow=''; }
+  if(e.target.matches('[data-age="no"]')){ alert('Доступ 18+'); location.href='https://google.com'; }
 });
 
 // ===== Neon theme toggle (still persists if allowed; if not, harmless) =====
