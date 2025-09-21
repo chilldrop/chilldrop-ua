@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ChillDrop — один файл (SPA)</title>
+  <meta name="description" content="ChillDrop: CBD желейки та аксесуари в Україні. Однофайловий сайт для GitHub Pages.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌿</text></svg>">
+  <style>
+:root{--bg:#0b1220;--card:#0e1729;--muted:#94a3b8;--text:#e2e8f0;--brand:#16a34a;--brand-2:#22c55e;--border:#1f2a44;--neon:#22e3a7;--neon-2:#61f4df;--glow:0 0 12px rgba(34,227,167,.55),0 0 32px rgba(34,227,167,.35),0 0 64px rgba(34,227,167,.15)}
+*{box-sizing:border-box}html,body{height:100%}body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,rgba(34,197,94,.10),transparent),var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial}
+.container{max-width:1120px;margin:0 auto;padding:0 20px}.row{display:flex;align-items:center;gap:12px}
+a{color:inherit;text-decoration:none}.muted{color:var(--muted)}
+.btn{border:1px solid var(--brand);background:transparent;color:var(--text);padding:12px 16px;border-radius:10px;cursor:pointer}
+.btn.small{padding:8px 12px;border-radius:8px}.btn.primary{background:linear-gradient(90deg,var(--brand),var(--brand-2));border:none;color:#05240f;font-weight:700}
+.btn.ghost{border:1px solid var(--border);background:#0b1422;color:var(--text)}.badge{background:var(--brand);color:#05240f;border-radius:999px;padding:2px 8px;font-size:12px;margin-left:6px}
+.icon-btn{border:1px solid var(--border);background:transparent;color:var(--text);padding:6px 10px;border-radius:8px;cursor:pointer}
+.site-header{position:sticky;top:0;backdrop-filter:blur(8px);background:rgba(11,18,32,.75);border-bottom:1px solid rgba(31,42,68,.6);z-index:10}
+.site-header .container{display:flex;align-items:center;justify-content:space-between;height:64px}
+.nav{display:flex;gap:18px}.nav a{opacity:.9}.nav a:hover{opacity:1}
+.brand svg{display:block}
+.hero{padding:64px 0}.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
+.hero-copy h1{font-size:40px;line-height:1.1;margin:0 0 12px}.lead{color:#cbd5e1;max-width:56ch}
+.hero-actions{display:flex;gap:12px;margin:16px 0 8px}.trust{display:flex;gap:16px;list-style:none;padding:0;margin:16px 0 0;color:#cbd5e1;font-size:14px}
+.hero-visual{position:relative;height:320px}.blob{position:absolute;inset:0;filter:blur(60px);background:conic-gradient(from 90deg at 50% 50%, rgba(34,227,167,.25), rgba(97,244,223,.10), transparent)}
+.card-preview{position:absolute;right:10%;top:10%;width:280px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 8px 40px rgba(0,0,0,.4);overflow:hidden}
+.card-img{height:140px;background:linear-gradient(45deg,#0f172a,#142036)}.card-info{padding:12px 14px}.pill{display:inline-block;background:#062e22;color:#86efac;border:1px solid #14532d;border-radius:999px;padding:4px 8px;font-size:12px}
+.section-head{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:16px;margin:24px 0}
+.filters{display:flex;gap:8px;flex-wrap:wrap}.filters select,.filters input{border:1px solid var(--border);background:#0b1422;color:#e2e8f0;padding:10px 12px;border-radius:10px;outline:none}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{background:linear-gradient(120deg,#101a31,#0a1223);height:160px}
+.card-body{padding:12px}.card h3{font-size:16px;margin:4px 0 8px}.meta{display:flex;justify-content:space-between;color:#cbd5e1;font-size:13px}.price{font-weight:700}
+.card .actions{display:flex;gap:8px;margin:12px 0 12px}.tag{display:inline-block;background:#0a1c17;border:1px solid #164e3b;color:#a7f3d0;border-radius:999px;padding:2px 8px;font-size:12px}
+.benefits{background:linear-gradient(180deg, rgba(34,197,94,.06), transparent);padding:40px 0;margin:40px 0}
+.benefit-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.benefit-grid article{background:var(--card);border:1px solid var(--border);padding:18px;border-radius:14px}
+.faq details{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px;margin:10px 0}.faq summary{cursor:pointer}
+.site-footer{border-top:1px solid var(--border);padding:28px 0;margin-top:40px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 2fr;gap:16px}.footer-nav{display:grid;gap:8px}
+.subscribe .row{display:flex;gap:8px;margin-top:8px}.subscribe input{flex:1;border:1px solid var(--border);background:#0b1422;color:#e2e8f0;padding:10px 12px;border-radius:10px}
+.cart{position:fixed;right:16px;bottom:16px;width:360px;background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 12px 60px rgba(0,0,0,.5);transform:translateY(20px);opacity:0;pointer-events:none;transition:.2s ease}
+.cart.open{transform:translateY(0);opacity:1;pointer-events:auto}
+.cart-head{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--border)}
+.cart-body{max-height:300px;overflow:auto}
+.cart-item{display:grid;grid-template-columns:48px 1fr auto;gap:10px;padding:12px 14px;border-bottom:1px solid var(--border)}
+.cart-item .thumb{height:48px;border-radius:8px}.cart-foot{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-top:1px solid var(--border)}
+body.neon .brand svg{filter:drop-shadow(0 0 6px rgba(34,227,167,.6))}body.neon .btn.primary{box-shadow:var(--glow)}body.neon .card{position:relative;border-color:rgba(97,244,223,.25)}
+@media (max-width: 992px){.grid{grid-template-columns:repeat(3,1fr)}.hero-inner{grid-template-columns:1fr}.hero-visual{order:-1;height:260px}}
+@media (max-width: 640px){.nav{display:none}.grid{grid-template-columns:repeat(2,1fr)}.footer-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<!-- Тело перерисовывается роутером -->
+<script>
+// --- Data ---
+const PRODUCTS = [{"id": 1, "slug": "chill-bears-40", "title": "Chill Bears CBD 40 г • ~25 мг/шт", "price": 500, "potency": 25, "category": "gummies", "desc": "Мікс смаків. Орієнтовно 8–10 ведмедиків по ~25 мг CBD кожен. Без медичних заяв.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+Q2hpbGwgQmVhcnMgNDAg0LM8L3RleHQ+Cjwvc3ZnPg=="}, {"id": 2, "slug": "chill-bears-160", "title": "Chill Bears CBD 160 г • ~25 мг/шт", "price": 1950, "potency": 25, "category": "gummies", "desc": "Велика банка. Орієнтовно 32–40 ведмедиків по ~25 мг CBD.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+Q2hpbGwgQmVhcnMgMTYwINCzPC90ZXh0Pgo8L3N2Zz4="}, {"id": 3, "slug": "cbd-cart-1ml", "title": "Картридж CBD 1 мл • Natural", "price": 1099, "potency": 50, "category": "vapes", "desc": "1 мл, стандарт 510. Терпеновий профіль Natural.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+0JrQsNGA0YLRgNC40LTQtiAxINC80Ls8L3RleHQ+Cjwvc3ZnPg=="}, {"id": 4, "slug": "glass-pipe-mini", "title": "Стеклянная трубка • Mini", "price": 399, "potency": 0, "category": "pipes", "desc": "Компактна, легко чистити. Матове скло.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+0KLRgNGD0LHQutCwIE1pbmk8L3RleHQ+Cjwvc3ZnPg=="}, {"id": 5, "slug": "clean-brush-kit", "title": "Щітки для чищення • набір", "price": 159, "potency": 0, "category": "accessories", "desc": "Набір щіточок різного діаметру для трубок і бонгів.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+0KnRltGC0LrQuCDQvdCw0LHRltGAPC90ZXh0Pgo8L3N2Zz4="}, {"id": 6, "slug": "acrylic-bong-30", "title": "Бонг акриловий • 30 см", "price": 1599, "potency": 0, "category": "pipes", "desc": "Легкий та міцний. Знімна чаша, 30 см висота.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+0JHQvtC90LMgMzAg0YHQvDwvdGV4dD4KPC9zdmc+"}, {"id": 7, "slug": "mint-ease-20", "title": "Желейки CBD «Mint Ease» • 20 мг", "price": 369, "potency": 20, "category": "gummies", "desc": "М'ятний смак, 20 мг CBD на порцію.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+TWludCBFYXNlIDIwINC80LM8L3RleHQ+Cjwvc3ZnPg=="}, {"id": 8, "slug": "organizer", "title": "Органайзер для аксесуарів", "price": 299, "potency": 0, "category": "accessories", "desc": "Компактний кейс з перегородками.", "img": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI5MDAiIGhlaWdodD0iNjQwIj4KICA8ZGVmcz48bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj48c3RvcCBvZmZzZXQ9IjAiIHN0b3AtY29sb3I9IiMxMDFhMzEiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiMwYTEyMjMiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSJ1cmwoI2cpIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiNiZmZjZWYiIGZvbnQtc2l6ZT0iNDIiIGZvbnQtZmFtaWx5PSJJbnRlciwgQXJpYWwiIGR5PSIuMzVlbSI+0J7RgNCz0LDQvdCw0LnQt9C10YA8L3RleHQ+Cjwvc3ZnPg=="}];
+
+// --- Utils ---
+const $=s=>document.querySelector(s); const $$=s=>Array.from(document.querySelectorAll(s));
+function fmtUAH(n){return new Intl.NumberFormat('uk-UA',{style:'currency',currency:'UAH',maximumFractionDigits:0}).format(n)}
+
+// --- Cart & theme ---
+const CART_KEY='chill_cart'; const NEON_KEY='neon_on';
+function loadCart(){try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch(e){return[]}}
+function saveCart(b){localStorage.setItem(CART_KEY, JSON.stringify(b))}
+function addToCart(p){const b=loadCart();const line=b.find(x=>x.id===p.id);if(line){line.qty++}else{b.push({id:p.id,title:p.title,price:p.price,qty:1})}saveCart(b);renderCart();openCart();}
+function removeFromCart(id){const b=loadCart().filter(x=>x.id!==id);saveCart(b);renderCart()}
+function cartTotal(){return loadCart().reduce((s,x)=>s+x.price*x.qty,0)}
+function cartCount(){return loadCart().reduce((s,x)=>s+x.qty,0)}
+function renderCart(){const b=loadCart();$('#cart-items').innerHTML=b.map(x=>`<div class='cart-item'><div class='thumb'></div><div><div>${x.title}</div><small class='muted'>x${x.qty}</small></div><div><div>${fmtUAH(x.price*x.qty)}</div><button class='icon-btn' data-rm='${x.id}'>✕</button></div></div>`).join('');$('#cart-total').textContent=fmtUAH(cartTotal());$('#cart-count').textContent=cartCount()}
+function openCart(){$('#cart').classList.add('open');$('#cart').setAttribute('aria-hidden','false')} function closeCart(){$('#cart').classList.remove('open');$('#cart').setAttribute('aria-hidden','true')}
+function applyNeon(){const on=localStorage.getItem(NEON_KEY)==='1';document.body.classList.toggle('neon',on);const b=$('#toggle-neon');if(b){b.textContent='Неон: '+(on?'ON':'OFF');b.setAttribute('aria-pressed',on?'true':'false')}}
+document.addEventListener('click',e=>{if(e.target.id==='open-cart')openCart();if(e.target.id==='close-cart')closeCart();if(e.target.dataset?.rm)removeFromCart(Number(e.target.dataset.rm));if(e.target.id==='toggle-neon'){const on=localStorage.getItem(NEON_KEY)==='1';localStorage.setItem(NEON_KEY,on?'0':'1');applyNeon();}});
+
+// --- Router (hash) ---
+const routes={"/":homeView,"/catalog":catalogView,"/product":productView,"/checkout":checkoutView,"/success":successView,"/policy":policyView};
+function go(p){location.hash="#"+p}
+function parseHash(){const h=location.hash.replace(/^#/, "")||"/";const [path,query]=h.split("?");const params=new URLSearchParams(query||"");return{path,params}}
+window.addEventListener('hashchange',renderRoute);
+
+// --- Views ---
+function layout(content){
+  return `
+<header class="site-header">
+  <div class="container row">
+    <a class="brand" href="#" onclick="go('/')" aria-label="ChillDrop">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 36" width="140" height="28" role="img" aria-label="ChillDrop">
+        <defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#16a34a"/></linearGradient></defs>
+        <g fill="none" stroke="url(#g)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(4,4) scale(0.9)">
+          <path d="M16 28c8-8 8-20 8-20s-8 4-8 12c0-8-8-12-8-12s0 12 8 20z"/><path d="M16 18l6 4M16 18l-6 4"/>
+        </g><text x="52" y="24" font-family="Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial" font-weight="800" font-size="20" fill="#e2e8f0">ChillDrop</text>
+      </svg>
+    </a>
+    <nav class="nav"><a href="#" onclick="go('/#catalog');return false;">Каталог</a><a href="#" onclick="go('/catalog');return false;">Всі товари</a><a href="#" onclick="go('/policy');return false;">Політика</a></nav>
+    <div class="header-cta"><button class="btn small ghost" id="toggle-neon" aria-pressed="false">Неон: OFF</button><button class="btn small" id="open-cart">Кошик <span class="badge" id="cart-count">0</span></button></div>
+  </div>
+</header>
+${content}
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 36" width="140" height="28" role="img" aria-label="ChillDrop">
+        <defs><linearGradient id="g2" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#22c55e"/><stop offset="1" stop-color="#16a34a"/></linearGradient></defs>
+        <g fill="none" stroke="url(#g2)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" transform="translate(4,4) scale(0.9)">
+          <path d="M16 28c8-8 8-20 8-20s-8 4-8 12c0-8-8-12-8-12s0 12 8 20z"/><path d="M16 18l6 4M16 18l-6 4"/></g>
+        <text x="52" y="24" font-family="Inter" font-weight="800" font-size="20" fill="#e2e8f0">ChillDrop</text>
+      </svg>
+      <p class="muted">Без медичних заяв. Перевіряйте місцеве законодавство.</p>
+    </div>
+    <nav class="footer-nav"><a href="#" onclick="go('/');return false;">Каталог</a><a href="#" onclick="go('/catalog');return false;">Всі товари</a><a href="#" onclick="go('/policy');return false;">Політика</a></nav>
+    <form class="subscribe" onsubmit="event.preventDefault(); alert('Дякуємо!');">
+      <label for="email">Підписка на оновлення</label>
+      <div class="row"><input id="email" type="email" placeholder="you@example.com" required><button class="btn small">Підписатися</button></div>
+    </form>
+  </div>
+</footer>
+<aside id="cart" class="cart" aria-hidden="true" role="dialog" aria-labelledby="cart-title">
+  <div class="cart-head"><h3 id="cart-title">Кошик</h3><button class="icon-btn" id="close-cart" aria-label="Закрити">✕</button></div>
+  <div class="cart-body" id="cart-items"></div>
+  <div class="cart-foot"><div class="cart-total">Разом: <strong id="cart-total">0 ₴</strong></div><button class="btn primary" onclick="go('/checkout')">Оформити</button></div>
+</aside>`;
+}
+
+function homeView() {
+  return layout(`
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy">
+          <h1>CBD желейки & аксесуари • Україна</h1>
+          <p class="lead">Натуральні смаки, чітка дозування і швидка доставка по Україні. Без медичних обіцянок.</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'});return false;">Перейти в каталог</a>
+            <a class="btn ghost" href="#" onclick="go('/catalog');return false;">Всі товари</a>
+          </div>
+          <ul class="trust"><li>Доставка: НП / УП</li><li>Оплата: картка / Monobank / WayforPay / крипто</li><li>Нейтральне пакування</li></ul>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="blob"></div>
+          <div class="card-preview"><div class="card-img"></div><div class="card-info"><span class="pill">CBD 25 мг</span><h3>Chill Bears</h3><p>40 г • 160 г</p></div></div>
+        </div>
+      </div>
+    </section>
+    <section id="catalog" class="catalog container">
+      <header class="section-head">
+        <h2>Каталог</h2>
+        <div class="filters" role="toolbar" aria-label="Фільтри">
+          <select id="filter-category" aria-label="Категорія">
+            <option value="all">Всі категорії</option><option value="gummies">Желейки CBD</option><option value="vapes">Картриджі/вейпи</option><option value="pipes">Трубки і бонги</option><option value="accessories">Аксесуари</option>
+          </select>
+          <select id="filter-potency" aria-label="Концентрація">
+            <option value="any">Будь-яка</option><option value="low">До 10 мг</option><option value="mid">10–25 мг</option><option value="high">25+ мг</option>
+          </select>
+          <input id="search" type="search" placeholder="Пошук…">
+        </div>
+      </header>
+      <div id="grid" class="grid"></div>
+    </section>
+    <section class="benefits"><div class="container"><h2>Для UA-ринку</h2><div class="benefit-grid"><article><h3>Комфортна доставка</h3><p>НП та УП. Пакування без маркувань.</p></article><article><h3>Прозора дозування</h3><p>Показуємо CBD-мг на порцію та упаковку.</p></article><article><h3>Оплата</h3><p>Карта, Monobank/WayforPay або криптовалюта.</p></article></div></div></section>
+    <section class="faq container"><h2>FAQ</h2><details><summary>Чи є медичні заяви?</summary><p>Ні. Не позиціонуємо як ліки — лише за призначенням виробника.</p></details><details><summary>Оплата та доставка?</summary><p>Карта, Monobank/WayforPay, крипто. Доставка НП/УП по Україні.</p></details></section>
+  </main>`);
+}
+
+function catalogView() {
+  return layout(`<main class="container" style="padding:24px 0">
+    <header class="section-head">
+      <h1>Всі товари</h1>
+      <div class="filters" role="toolbar">
+        <select id="filter-category"><option value="all">Всі</option><option value="gummies">Желейки</option><option value="vapes">Вейпи</option><option value="pipes">Трубки/бонги</option><option value="accessories">Аксесуари</option></select>
+        <select id="filter-potency"><option value="any">Будь-яка</option><option value="low">До 10 мг</option><option value="mid">10–25 мг</option><option value="high">25+ мг</option></select>
+        <input id="search" type="search" placeholder="Пошук…">
+      </div>
+    </header>
+    <div id="grid" class="grid"></div>
+  </main>`);
+}
+
+function productView(params) {
+  const id = Number(params.get('id'));
+  const p = PRODUCTS.find(x=>x.id===id) || PRODUCTS[0];
+  return layout(`<main class="container" style="padding:24px 0">
+    <div class="row" style="gap:24px; align-items:flex-start; flex-wrap:wrap">
+      <img src="${p.img}" alt="${p.title}" style="width:420px;max-width:100%;border-radius:16px;border:1px solid var(--border);background:#0a1223">
+      <div style="flex:1;min-width:280px">
+        <h1 style="margin:0 0 8px">${p.title}</h1>
+        <p class="muted">${p.desc||''}</p>
+        <div class="row" style="justify-content:space-between"><strong style="font-size:22px">${fmtUAH(p.price)}</strong><span class="pill">${p.potency?('CBD '+p.potency+' мг'):''}</span></div>
+        <div style="margin:16px 0"><button class="btn primary" id="buy-now">Купити</button> <button class="btn" id="add-cart">До кошика</button></div>
+        <small class="muted">Без медичних заяв. Перевіряйте місцеве законодавство.</small>
+      </div>
+    </div>
+  </main>`);
+}
+
+function checkoutView() {
+  const b = loadCart(); const total = fmtUAH(b.reduce((s,x)=>s+x.price*x.qty,0));
+  return layout(`<main class="container" style="padding:24px 0">
+    <h1>Оформлення</h1>
+    <div class="row" style="align-items:flex-start; gap:24px; flex-wrap:wrap">
+      <form id="checkout-form" style="flex:1; min-width:300px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px">
+        <label>Ім'я<br><input required style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border); background:#0b1422; color:var(--text)"></label><br><br>
+        <label>Телефон<br><input required type="tel" style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border); background:#0b1422; color:var(--text)"></label><br><br>
+        <label>Місто<br><input required style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border); background:#0b1422; color:var(--text)"></label><br><br>
+        <label>Відділення Нової пошти<br><input required style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border); background:#0b1422; color:var(--text)"></label><br><br>
+        <label>Оплата<br>
+          <select required style="width:100%; padding:10px; border-radius:10px; border:1px solid var(--border); background:#0b1422; color:var(--text)">
+            <option value="card">Карта/Monobank/WayforPay</option>
+            <option value="crypto">Криптовалюта</option>
+            <option value="cod">Накладений платіж</option>
+          </select>
+        </label><br><br>
+        <button class="btn primary" type="submit">Підтвердити замовлення</button>
+        <p class="muted" style="margin-top:8px">На проді це місце для інтеграції WayforPay/Monobank/крипти.</p>
+      </form>
+      <aside style="flex:1; min-width:280px; background:var(--card); border:1px solid var(--border); border-radius:16px; padding:16px">
+        <h3>Ваше замовлення</h3>
+        <div id="order-summary"></div>
+      </aside>
+    </div>
+  </main>`);
+}
+
+function successView(){return layout(`<main class="container" style="padding:48px 0; text-align:center"><h1>Замовлення прийнято 🙌</h1><p class="lead">Ми надішлемо підтвердження у найближчий час.</p><p><a class="btn primary" href="#" onclick="go('/');return false;">Повернутися в каталог</a></p></main>`);}
+function policyView(){return layout(`<main class="container" style="padding:24px 0"><h1>Політика використання</h1><p class="muted">Продукція не є лікарським засобом. Дотримуйтесь рекомендацій виробника. Перевіряйте місцеве законодавство.</p><h3>Доставка</h3><p>НП/УП по Україні. Нейтральне пакування.</p><h3>Оплата</h3><p>Карта, Monobank/WayforPay, криптовалюта.</p></main>`);}
+
+// --- Renderers for dynamic parts ---
+function renderGrid(){
+  const q=$('#search')?.value?.toLowerCase()||''; const cat=$('#filter-category')?.value||'all'; const pot=$('#filter-potency')?.value||'any';
+  let list=PRODUCTS.filter(p=>(cat==='all'||p.category===cat)&&(!q||p.title.toLowerCase().includes(q)));
+  list=list.filter(p=>pot==='any'?true:pot==='low'?p.potency>0&&p.potency<10:pot==='mid'?p.potency>=10&&p.potency<=25:p.potency>25);
+  const grid=$('#grid'); if(!grid) return;
+  grid.innerHTML=list.map(p=>`
+    <article class="card">
+      <a href="#" onclick="go('/product?id=${p.id}');return false;" aria-label="${p.title}">
+        <img class="thumb" src="${p.img}" alt="${p.title}">
+      </a>
+      <div class="card-body">
+        <div class="meta"><span class="tag">${p.category}</span><span class="pill">${p.potency?('CBD '+p.potency+' мг'):'аксес.'}</span></div>
+        <h3><a href="#" onclick="go('/product?id=${p.id}');return false;">${p.title}</a></h3>
+        <div class="meta"><span class="price">${fmtUAH(p.price)}</span><div class="actions"><button class="btn small" data-add="${p.id}">До кошика</button></div></div>
+      </div>
+    </article>`).join('');
+}
+
+function wireCommon(){
+  document.addEventListener('click', e=>{const id=e.target?.getAttribute?.('data-add'); if(id){const prod=PRODUCTS.find(p=>p.id===Number(id)); if(prod) addToCart(prod);} });
+  renderCart();
+  applyNeon();
+}
+
+function renderRoute(){
+  const {path, params} = parseHash();
+  const view = routes[path] || homeView;
+  document.body.innerHTML = view(params);
+  wireCommon();
+  if($('#grid')){['#filter-category','#filter-potency','#search'].forEach(sel=>{const x=$(sel); x&&x.addEventListener('input', renderGrid);}); renderGrid();}
+  if(path==='/product'){ const p = PRODUCTS.find(x=>x.id===Number(params.get('id'))) || PRODUCTS[0];
+    setTimeout(()=>{ const add=$('#add-cart'); const buy=$('#buy-now'); add&&add.addEventListener('click',()=>addToCart(p)); buy&&buy.addEventListener('click',()=>{addToCart(p); go('/checkout')}); }, 0);
+  }
+  if(path==='/checkout'){ setTimeout(()=>{ $('#order-summary').innerHTML=loadCart().map(x=>`<div class='row' style='justify-content:space-between'><span>${x.title} × ${x.qty}</span><span>${fmtUAH(x.price*x.qty)}</span></div>`).join('')+`<hr><div class='row' style='justify-content:space-between'><strong>Разом</strong><strong>${fmtUAH(cartTotal())}</strong></div>`; const f=$('#checkout-form'); f&&f.addEventListener('submit',(e)=>{e.preventDefault(); localStorage.removeItem(CART_KEY); go('/success')}); },0); }
+}
+
+// Boot
+if(!location.hash) location.hash = "#/";
+renderRoute();
+</script>
+</body>
+</html>
