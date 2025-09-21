@@ -1,3 +1,3 @@
-# ChillDrop UA
+# ChillDrop Demo
 
-Landing page with neon theme and age-gate (18+).
+Rebuild demo after reset. Date: 2025-09-21
